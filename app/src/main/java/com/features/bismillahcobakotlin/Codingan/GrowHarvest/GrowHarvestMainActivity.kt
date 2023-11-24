@@ -1,7 +1,8 @@
 package com.features.bismillahcobakotlin.Codingan.GrowHarvest
 import android.os.Bundle
-import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.features.bismillahcobakotlin.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,16 +11,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class GrowHarvestMainActivity : AppCompatActivity() {
-    private lateinit var gridView: GridView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var productAdapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grow_harvest_main)
+        setContentView(R.layout.activity_data_barang)
 
-        gridView = findViewById(R.id.gridView)
+        recyclerView = findViewById(R.id.recyclerView)
         productAdapter = ProductAdapter(this)
-        gridView.adapter = productAdapter
+        recyclerView.adapter = productAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Ganti BASE_URL dengan URL sesuai API Anda
         val retrofit = Retrofit.Builder()
