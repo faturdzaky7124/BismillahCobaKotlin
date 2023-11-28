@@ -1,54 +1,69 @@
 package com.features.bismillahcobakotlin.Codingan.CobaCoba
 
 import android.os.Bundle
-import android.widget.ListView
-import android.widget.TextView
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.features.bismillahcobakotlin.R
-import org.json.JSONArray
 import org.json.JSONException
-import org.json.JSONObject
-import java.util.ArrayList
 
 class CobaMainActivity : AppCompatActivity() {
-    private lateinit var textViewName: TextView
-    private lateinit var textViewYear: TextView
+
+    private val charList = ArrayList<CobaDataModel>()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var cobaCustomAdapter: CobaCustomAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coba_main)  // Sesuaikan dengan nama layout yang Anda miliki
+        setContentView(R.layout.activity_coba_volley_main)
 
-        fetchData()
-    }
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        cobaCustomAdapter = CobaCustomAdapter(this, charList)
+        recyclerView.adapter = cobaCustomAdapter
 
-    private fun fetchData() {
-        val url = "https://reqres.in/api/user"
+        val apiUrl = "https://growharvest.my.id/API/produk.php"
 
-        val requestQueue: RequestQueue = Volley.newRequestQueue(this)
+        // Menggunakan Volley untuk mengambil data JSON
+        val requestQueue = Volley.newRequestQueue(this)
 
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
+        val jsonArrayRequest = JsonArrayRequest(
+            Request.Method.GET, apiUrl, null,
             Response.Listener { response ->
-                // Handle the response
-                val name = response.getJSONObject("data").getString("first_name")
-                val year = response.getJSONObject("data").getString("year")
-
-                // Tampilkan data ke dalam layout
-                textViewName.text = "Nama: $name"
-                textViewYear.text = "Tahun: $year"
+                // Mengambil data produk dari JSON response
+                try {
+                    for (i in 0 until response.length()) {
+                        val charJson = response.getJSONObject(i)
+                        val character = CobaDataModel(
+                            charJson.getString("name"),
+                            charJson.getString("gender"),
+                            charJson.getString("image")
+                        )
+                        charList.add(character)
+                    }
+                    // Memberitahu adapter bahwa dataset telah berubah
+                    cobaCustomAdapter.notifyDataSetChanged()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
             },
             Response.ErrorListener { error ->
-                // Handle errors
-                textViewName.text = "Error: ${error.message}"
+                // Menangani kesalahan
+                error.printStackTrace()
+                if (error is VolleyError) {
+                    val errorMessage = error.message
+                    Log.e("VolleyError", errorMessage ?: "Unknown VolleyError")
+                }
             }
         )
 
-        // Add the request to the RequestQueue
-        requestQueue.add(jsonObjectRequest)
+        // Menambahkan request ke queue
+        requestQueue.add(jsonArrayRequest)
     }
 }

@@ -3,20 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="373dp"
-        android:layout_height="34dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:id="@+id/textView2"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/judulItem"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/judulTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
 </LinearLayout>

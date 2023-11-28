@@ -1,50 +1,41 @@
 package com.features.bismillahcobakotlin.Codingan.CobaCoba
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.features.bismillahcobakotlin.R
 
-class CobaCustomAdapter(private val context: Context, private val dataModels: ArrayList<CobaDataModel>) : BaseAdapter() {
+class CobaCustomAdapter(private val context: Context, private val charList: List<CobaDataModel>) :
+    RecyclerView.Adapter<CobaCustomAdapter.ViewHolder>() {
 
-    override fun getCount(): Int {
-        return dataModels.size
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val charName: TextView = itemView.findViewById(R.id.productName)
+        val charGender: TextView = itemView.findViewById(R.id.productPrice)
+        val charImage: ImageView = itemView.findViewById(R.id.productImage)
     }
 
-    override fun getItem(position: Int): Any {
-        return dataModels[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.item_product_volley, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val character = charList[position]
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var convertView = convertView
-        if (convertView == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.list_item, null)
-        }
-
-        // Mengambil data untuk posisi tertentu.
-        val dataModel = dataModels[position]
-
-        // Mendapatkan referensi ke elemen UI.
-        val titleTextView: TextView = convertView!!.findViewById(R.id.titleTextView)
-        val imageView: ImageView = convertView.findViewById(R.id.imageView)
-
-        // Menetapkan data ke elemen UI.
-        titleTextView.text = dataModel.name
-
-        // Menggunakan Glide untuk memuat dan menampilkan gambar dari URL.
+        holder.charName.text = character.name
+        holder.charGender.text = "Gender: ${character.gender}"
         Glide.with(context)
-            .load(dataModel.image)
-            .into(imageView)
+            .load(character.image)
+            .into(holder.charImage)
+    }
 
-        return convertView
+    override fun getItemCount(): Int {
+        return charList.size
     }
 }

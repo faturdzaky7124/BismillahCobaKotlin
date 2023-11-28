@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/judulItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="111dp"
+        android:text="Item"
+        app:layout_constraintEnd_toStartOf="@+id/judulHarga"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/judulKuantitas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="41dp"
+        android:text="qty"
+        app:layout_constraintEnd_toStartOf="@+id/judulTotal"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/judulTotal"
+        android:layout_width="71dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="44dp"
+        android:text="Total"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/judulHarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="43dp"
+        android:text="Harga"
+        app:layout_constraintEnd_toStartOf="@+id/judulKuantitas"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/isiItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="16dp"
+        android:text="Pestisida rmx"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/judulItem" />
+
+    <TextView
+        android:id="@+id/isiHarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="16dp"
+        android:text="38000"
+        app:layout_constraintStart_toEndOf="@+id/isiItem"
+        app:layout_constraintTop_toBottomOf="@+id/judulHarga" />
+    <TextView
+        android:id="@+id/isiKuantitas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:text="4"
+        app:layout_constraintStart_toEndOf="@+id/isiHarga"
+        app:layout_constraintTop_toBottomOf="@+id/judulKuantitas" />
+
+    <TextView
+        android:id="@+id/isiTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="13dp"
+        android:text="152000"
+        app:layout_constraintStart_toEndOf="@+id/isiKuantitas"
+        app:layout_constraintTop_toBottomOf="@+id/judulTotal" />
+</androidx.constraintlayout.widget.ConstraintLayout>

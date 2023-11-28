@@ -19,16 +19,12 @@
             android:name=".Codingan.GrowHarvest.GrowHarvestMainActivity"
             android:exported="false" />
         <activity
-            android:name=".Codingan.ChatGPT.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Codingan.CobaCoba.CobaMainActivity"
-            android:exported="false" />
-        <activity
             android:name=".Codingan.CobaVolley.MainActivity"
             android:exported="false" />
+        <activity android:name=".Codingan.Transaksi.DaftarProdukActivity"
+            android:exported="false"/>
         <activity
-            android:name=".Codingan.CobaVolley.PenampungFragDataProduk"
+            android:name=".Codingan.Transaksi.KeranjangActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
